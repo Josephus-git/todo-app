@@ -15,7 +15,7 @@ function App() {
   // ]
 
   const [todos, setTodos] = useState([
-    {input: 'Hello! Add your first todo!', complete: true },
+    {input: 'Hello! Add your first todo!', complete: false },
   ])
 
   const [selectedTab, setSelectedTab] = useState('Open')
@@ -50,11 +50,18 @@ function App() {
 
 
   useEffect(() => {
-    if (!localStorage || localStorage.getItem('todo-app')) { return }
-    let db = JSON.parse(localStorage.getItem('todo-app'))
-    if (db === null) { return }
-    setTodos(db.todos)
-  }, [])
+    const savedData = localStorage.getItem('todo-app');
+    if (savedData) {
+      try {
+        const db = JSON.parse(savedData);
+        if (db && db.todos) {
+          setTodos(db.todos);
+        }
+      } catch (error) {
+        console.error("Error parsing JSON from localStorage:", error);
+      }
+    }
+  }, []);
 
   return (
     <>
