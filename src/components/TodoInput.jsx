@@ -12,7 +12,7 @@ export function TodoInput(props) {
                 handleAddTodo(inputValue)
                 setInputValue('')
             }}>
-                <i class="fa-solid fa-plus"></i>
+                <i className="fa-solid fa-plus"></i>
             </button>
 
         </div>
